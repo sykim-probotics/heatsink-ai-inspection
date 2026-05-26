@@ -78,3 +78,17 @@ flowchart LR
 - FastAPI, WebSocket
 - SQLite
 - Huateng MVSDK (산업용 카메라)
+
+ ## 역할 — YOLOv8 방열판 핀 불량 검출 모델 학습 및 평가
+
+  ### 데이터 전처리
+  - CVAT에서 방열판 핀 불량(휘어진 핀) 이미지에 Bounding Box 어노테이션, YOLOv8 format export
+
+  ### 모델 학습
+  - YOLOv8s 기반으로 현장 환경 변화에 대응하는 3가지 augmentation 전략 설계
+    - **base**: 현재 촬영 조건 기준 모델
+    - **light**: 조명 변화·반사 대응 (채도·밝기 augmentation 강화)
+    - **position**: 방열판 위치 흔들림·미세 회전 대응 (translate·scale·degrees 강화)
+
+  ### 추론 테스트 및 평가
+  - 학습 완료 후 3개 모델에 대해 TP/TN/FP/FN 기반 Precision·Recall 측정 
